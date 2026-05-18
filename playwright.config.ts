@@ -29,7 +29,7 @@ export default defineConfig({
                 trace: "on-first-retry",
                 headless: false,
                 screenshot: "only-on-failure",
-                video: "on",
+                video: "on-first-retry",
                 storageState: AUTH_FILE,
             }
         },

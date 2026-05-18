@@ -1,9 +1,17 @@
 import { test, expect } from "../../fixtures/api.fixture";
 import { UserBuilder } from '../../builders';
-import { User } from '../../models/api/index';
-import { UpdateUserRequest } from "../../models/api/baseModel";
+import { CreateUserRequest } from '../../models/api/index';
 
 test.describe('User API Tests', () => {
+    test("Get all users", async ({ api }) => {
+        const response = await api.users.getAllUsers();
+        expect(response.ok()).toBeTruthy();
+
+        const users = await response.json() as CreateUserRequest[];
+        expect(Array.isArray(users)).toBeTruthy();
+    });
+
+
     test("Create, update and delete user", async ({ api }) => {
         
         const userData = new UserBuilder()
@@ -15,7 +23,8 @@ test.describe('User API Tests', () => {
             .build();
         
         const createResponse = await api.users.createUser(userData);
-        console.log(`User created with name: ${createResponse.name}`);
+        expect(createResponse.ok()).toBeTruthy();
+        console.log(`User created with name: ${userData.name}`);
         console.log(`User: ${JSON.stringify(createResponse)}`);
     });
 });

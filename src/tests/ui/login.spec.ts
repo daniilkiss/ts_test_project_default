@@ -8,12 +8,12 @@ test.describe("Login", () => {
     const invalidCredentials = [
         { username: 'invalid_user', password: 'invalid_password', description: 'Invalid username and password', errorMessage: 'Epic sadface: Username and password do not match any user in this service'},
         { username: '', password: '', description: 'Empty username and password', errorMessage: 'Epic sadface: Username is required' },
-        { username: config.username, password: '', description: 'Empty password', errorMessage: 'Epic sadface: Password is required' },
-        { username: 'locked_out_user', password: config.password, description: 'Locked out user', errorMessage: 'Epic sadface: Sorry, this user has been locked out.' }
+        { username: config.ui.username, password: '', description: 'Empty password', errorMessage: 'Epic sadface: Password is required' },
+        { username: 'locked_out_user', password: config.ui.password, description: 'Locked out user', errorMessage: 'Epic sadface: Sorry, this user has been locked out.' }
     ];
 
     test('with valid credentials', async ({ loginPage, page }) => {
-        await loginPage.login(config.username, config.password);
+        await loginPage.login(config.ui.username, config.ui.password);
         expect(page).toHaveURL('/inventory.html');
     });
 

@@ -1,14 +1,14 @@
 import { Page, Locator } from "@playwright/test";
-import { Navigation } from '../pages/index';
+import { BasePage } from './base.page';
 
-export class CartPage {
-    readonly navigation: Navigation;
+export class CartPage extends BasePage {
     private readonly continueShoppingButton: Locator;
     private readonly checkoutButton: Locator;
     private readonly removeButton: Locator;
+    protected readonly url = "/cart.html";
 
-    constructor(private readonly page: Page) {
-        this.navigation = new Navigation(page);
+    constructor(page: Page) {
+        super(page);
         this.continueShoppingButton = page.getByRole("button", { name: "Continue Shopping" });
         this.checkoutButton = page.getByRole("button", { name: "Checkout" });
         this.removeButton = page.getByRole("button", { name: "Remove" });

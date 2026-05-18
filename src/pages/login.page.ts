@@ -1,15 +1,15 @@
 import { Page, Locator } from "@playwright/test";
-import { Navigation } from '../pages/index';
+import { BasePage } from './base.page';
 
-export class LoginPage {
-    readonly navigation: Navigation;
+export class LoginPage extends BasePage {
     private readonly usernameInput: Locator;
     private readonly passwordInput: Locator;
     private readonly loginButton: Locator;
     private readonly errorText: Locator;
+    protected readonly url = "/";
 
-    constructor(private readonly page: Page) {
-        this.navigation = new Navigation(page);
+    constructor(page: Page) {
+        super(page);
         this.usernameInput = this.page.locator('[data-test="username"]');
         this.passwordInput = this.page.locator('[data-test="password"]');
         this.loginButton = this.page.locator('[data-test="login-button"]');
@@ -17,9 +17,7 @@ export class LoginPage {
     }
 
     async login(username: string, password: string) {
-        await this.usernameInput.click();
         await this.usernameInput.fill(username);
-        await this.passwordInput.click();
         await this.passwordInput.fill(password);
         await this.loginButton.click();
     }

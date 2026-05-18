@@ -3,13 +3,9 @@ import { HttpMethods } from "../models/api/index";
 
 export abstract class BaseApiClient {
 
-    constructor(protected request: APIRequestContext) {}
+    constructor(protected readonly request: APIRequestContext) {}
 
-    protected async handleResponse<T>(response: APIResponse): Promise<T>{
-        return response.json() as Promise<T>;
-    }
-
-    protected async logResponse(method: HttpMethods, response: APIResponse): Promise<void> {
+    protected logResponse(method: HttpMethods, response: APIResponse): void {
         console.log(`[${method}] ${response.url()} - Status: ${response.status()}`);
     }
 }

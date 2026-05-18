@@ -1,5 +1,5 @@
 import { Locator, Page } from "@playwright/test";
-import { Navigation } from '../pages/index';
+import { BasePage } from './base.page';
 
 const SELECTORS = {
     inventoryItem: '[data-test="inventory-item"]',
@@ -12,14 +12,15 @@ const SELECTORS = {
     cartButton: '[data-test="shopping-cart-link"]'
 } as const;
 
-export class InventoryPage {
-    readonly navigation: Navigation;
+export class InventoryPage extends BasePage {
     private readonly inventoryItems: Locator;
     private readonly cartItems: Locator;
     private readonly cartButton: Locator;
 
-    constructor(private readonly page: Page) {
-        this.navigation = new Navigation(page);
+    protected readonly url = "/inventory.html";
+
+    constructor(page: Page) {
+        super(page);
         this.inventoryItems = this.page.locator(SELECTORS.inventoryItem);
         this.cartItems = this.page.locator(SELECTORS.cartItemsCount);
         this.cartButton = this.page.locator(SELECTORS.cartButton);
@@ -27,13 +28,13 @@ export class InventoryPage {
 
     async addItemToCart(name: string) {
         const item = this.getInventoryItemLocatorByName(name);
-        item.hover();
+        await item.hover();
         await item.locator(SELECTORS.addToCartButton).click();
     }
 
     async removeItemFromCart(name: string) {
         const item = this.getInventoryItemLocatorByName(name);
-        item.hover();
+        await item.hover();
         await item.locator(SELECTORS.removeFromCartButton).click();
     }
 
@@ -57,7 +58,7 @@ export class InventoryPage {
     }> {
         const item = this.getInventoryItemLocatorByName(name);
 
-        item.hover();
+        await item.hover();
         const itemName = await item.locator(SELECTORS.itemName).innerText();
         const itemPrice = await item.locator(SELECTORS.itemPrice).innerText();
         const itemDescription = await item.locator(SELECTORS.itemDescription).innerText();

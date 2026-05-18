@@ -1,10 +1,11 @@
-import { User } from "../models/api/index";
+import { CreateUserRequest } from "models/api/index";
 
 export class UserBuilder{
-    private user: Partial<User> = {};
+    private user: Partial<CreateUserRequest> = {};
 
     constructor() {
-        this.user.Id = this.generateId();
+        this.user.id = this.generateId();
+        this.user.name = "Default Name";
     }
 
     withName(name: string): UserBuilder {
@@ -36,13 +37,16 @@ export class UserBuilder{
     }  
 
 
-    build(): User {
-        return this.user as User;
+    build(): CreateUserRequest {
+        if (!this.user.name) {
+            throw new Error("UserBuilder: name is required");
+        }
+
+        return this.user as CreateUserRequest;
     }
 
     private generateId(): number {
         return Math.floor(Math.random() * 100000);
     }
-
 
 }
