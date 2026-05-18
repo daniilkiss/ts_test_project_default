@@ -1,5 +1,5 @@
 import {test } from "@playwright/test";
-import path from "path/win32";
+import path from "path";
 import fs from "fs";
 
 test.describe("File download", () => {

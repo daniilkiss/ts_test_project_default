@@ -1,10 +1,10 @@
-import {User, UpdateUserRequest} from "../api/index";
+import {CreateUserRequest, UpdateUserRequest} from "./user.model";
 import {APIResponse} from "@playwright/test";
 
 export interface IUserRequest {
     getAllUsers(): Promise<APIResponse>;
     getUserById(id: number): Promise<APIResponse>;
-    createUser(user: User): Promise<APIResponse>;
+    createUser(user: CreateUserRequest): Promise<APIResponse>;
     updateUser(id: number, user: UpdateUserRequest): Promise<APIResponse>;
     deleteUser(id: number): Promise<APIResponse>;
 }

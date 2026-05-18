@@ -1,14 +1,19 @@
-import { BaseModel } from "../api/index";
+import { BaseModel } from "./base.model";
 
-export interface CreateUserRequest extends BaseModel {
+export interface User extends BaseModel {
     name: string;
     email: string;
     username: string;
     phone?: string;
-    address?:{
-        street?: string;
-        city?:string;
-    }
+    address?: { street?: string; city?: string; }
+}
+
+export interface CreateUserRequest {
+    name: string;
+    email: string;
+    username: string;
+    phone?: string;
+    address?: { street?: string; city?: string; }
 }
 
 export interface UpdateUserRequest {
@@ -17,8 +22,5 @@ export interface UpdateUserRequest {
     email?: string;
     username?: string;
     phone?: string;
-    address?:{
-        street?: string;
-        city?:string;
-    }
+    address?: { street?: string; city?: string; }
 }

@@ -4,7 +4,6 @@ export class UserBuilder{
     private user: Partial<CreateUserRequest> = {};
 
     constructor() {
-        this.user.id = this.generateId();
         this.user.name = "Default Name";
     }
 

@@ -1,16 +1,18 @@
 import { test, expect } from "../../fixtures/api.fixture";
 import { UserBuilder } from '../../builders';
-import { CreateUserRequest } from '../../models/api/index';
+import { User } from '../../models/api/index';
 
 test.describe('User API Tests', () => {
     test("Get all users", async ({ api }) => {
         const response = await api.users.getAllUsers();
         expect(response.ok()).toBeTruthy();
 
-        const users = await response.json() as CreateUserRequest[];
+        const users = await response.json() as User[];
         expect(Array.isArray(users)).toBeTruthy();
-    });
 
+        const getUser = users.filter(user => user.name.includes("John"));
+        console.log(`User with name containing 'John': ${JSON.stringify(getUser)}`);
+    });
 
     test("Create, update and delete user", async ({ api }) => {
         
@@ -24,7 +26,9 @@ test.describe('User API Tests', () => {
         
         const createResponse = await api.users.createUser(userData);
         expect(createResponse.ok()).toBeTruthy();
-        console.log(`User created with name: ${userData.name}`);
-        console.log(`User: ${JSON.stringify(createResponse)}`);
+
+        const body = await createResponse.json();
+        console.log(`User created with name: ${body.name}`);
+        console.log(`User: ${JSON.stringify(body)}`);
     });
 });

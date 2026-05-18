@@ -14,7 +14,7 @@ test.describe("Login", () => {
 
     test('with valid credentials', async ({ loginPage, page }) => {
         await loginPage.login(config.ui.username, config.ui.password);
-        expect(page).toHaveURL('/inventory.html');
+        await expect(page).toHaveURL('/inventory.html');
     });
 
     for (const { username, password, description, errorMessage } of invalidCredentials) {
@@ -22,7 +22,7 @@ test.describe("Login", () => {
             await loginPage.login(username, password);
             const actualErrorMessage = await loginPage.getErrorMessage();
             expect(actualErrorMessage).toBe(errorMessage);
-            expect(page).toHaveURL(config.baseUiUrl);
+            await expect(page).toHaveURL(config.baseUiUrl);
         });
     }
 });
