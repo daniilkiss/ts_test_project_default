@@ -26,19 +26,19 @@ export class InventoryPage extends BasePage {
         this.cartButton = this.page.locator(SELECTORS.cartButton);
     }
 
-    async addItemToCart(name: string) {
+    async addItemToCart(name: string): Promise<void> {
         const item = this.getInventoryItemLocatorByName(name);
         await item.hover();
         await item.locator(SELECTORS.addToCartButton).click();
     }
 
-    async removeItemFromCart(name: string) {
+    async removeItemFromCart(name: string): Promise<void> {
         const item = this.getInventoryItemLocatorByName(name);
         await item.hover();
         await item.locator(SELECTORS.removeFromCartButton).click();
     }
 
-    async openCartPage() {
+    async openCartPage(): Promise<void> {
         await this.cartButton.click();
     }
 

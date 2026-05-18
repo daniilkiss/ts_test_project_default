@@ -14,15 +14,15 @@ export class CartPage extends BasePage {
         this.removeButton = page.getByRole("button", { name: "Remove" });
     }
 
-    async clickOnContinueShopping() {
+    async clickOnContinueShopping(): Promise<void> {
         await this.continueShoppingButton.click();
     }
 
-    async clickOnCheckout() {
+    async clickOnCheckout(): Promise<void> {
         await this.checkoutButton.click();  
     }
 
-    async removeItemFromCart() {
+    async removeItemFromCart(): Promise<void> {
         await this.removeButton.click();
     }
 }

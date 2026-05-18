@@ -44,8 +44,4 @@ export class UserBuilder{
         return this.user as CreateUserRequest;
     }
 
-    private generateId(): number {
-        return Math.floor(Math.random() * 100000);
-    }
-
 }

@@ -1,6 +1,7 @@
 import { BaseModel } from "./base.model";
 
 export interface User extends BaseModel {
+    id: number;   // id генерирует сервер
     name: string;
     email: string;
     username: string;

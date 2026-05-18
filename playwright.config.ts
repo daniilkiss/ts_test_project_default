@@ -23,7 +23,7 @@ export default defineConfig({
         {
             name: "ui",
             testMatch: "ui/**/*.spec.ts",
-            // dependencies: ["ui-setup"],
+            dependencies: ["ui-setup"],
             use: {
                 baseURL: config.baseUiUrl,
                 trace: "on-first-retry",
